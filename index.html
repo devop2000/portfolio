@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SATHYADEVAN G | 3D IT Support & Network Engineer Portfolio</title>
+  <meta name="description" content="Professional 3D Portfolio of SATHYADEVAN G - Technology Aspirant, B.Tech IT Graduate, CCNA Certified, IT Support & Network Engineer." />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Three.js CDN for 3D Background -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cyber: {
+              cyan: '#00f0ff',
+              blue: '#3b82f6',
+              purple: '#a855f7',
+              emerald: '#10b981',
+              dark: '#07090e',
+              card: 'rgba(15, 23, 42, 0.75)',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#07090e] text-slate-100 antialiased selection:bg-cyan-500 selection:text-black">
+
+  <!-- 3D Canvas Background -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="cyber-grid-overlay"></div>
+
+  <!-- Main Container -->
+  <div class="relative z-10 flex flex-col min-h-screen">
+
+    <!-- ==========================================================================
+         NAVIGATION BAR
+         ========================================================================== -->
+    <header class="sticky top-0 z-40 w-full glass-nav px-4 lg:px-8 py-3.5 transition-all">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <!-- Logo / Name & Portrait -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="relative w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-cyan-400 via-blue-500 to-purple-500 shadow-lg shadow-cyan-500/30 group-hover:shadow-cyan-500/60 transition-all duration-300">
+            <img src="assets/images/profile.jpg" alt="Sathyadevan G" class="w-full h-full rounded-full object-cover object-top" />
+            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-[#07090e] rounded-full"></span>
+          </div>
+          <div>
+            <span class="font-heading font-extrabold text-lg tracking-wide text-white group-hover:text-cyan-400 transition-colors">
+              SATHYADEVAN <span class="text-cyan-400">G</span>
+            </span>
+            <span class="block text-[11px] font-mono-code text-slate-400 tracking-wider">IT & NETWORK ENGINEER</span>
+          </div>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+          <a href="#about" class="nav-link-item px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 transition-all">About</a>
+          <a href="#experience" class="nav-link-item px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 transition-all">Experience</a>
+          <a href="#skills" class="nav-link-item px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 transition-all">Skills</a>
+          <a href="#certifications" class="nav-link-item px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 transition-all">Certifications</a>
+          <a href="#projects" class="nav-link-item px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 transition-all">Projects</a>
+          <a href="#contact" class="nav-link-item px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 transition-all">Contact</a>
+        </nav>
+
+        <!-- Action CTA Buttons -->
+        <div class="flex items-center gap-3">
+          <button id="open-resume-nav" class="btn-glass px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 border border-slate-700 hover:border-cyan-400">
+            <i data-lucide="file-text" class="w-4 h-4 text-cyan-400"></i>
+            <span>Resume</span>
+          </button>
+          <a href="#contact" class="btn-neon-cyan hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider">
+            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+            <span>Hire Me</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==========================================================================
+         HERO SECTION (With 3D Photo Parallax & Interactive Tilt)
+         ========================================================================== -->
+    <section id="hero" class="relative pt-12 pb-20 md:pt-20 md:pb-28 px-4 lg:px-8 max-w-7xl mx-auto w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Hero Left: Text & Pitch -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          
+          <!-- Availability Badge -->
+          <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs font-medium backdrop-blur-md shadow-lg shadow-emerald-500/10">
+            <span class="status-beacon"></span>
+            <span>Available for IT & Network Roles • Karur, India</span>
+          </div>
+
+          <!-- Hero Main Heading -->
+          <div class="space-y-2">
+            <h2 class="text-sm md:text-base font-mono-code font-medium text-cyan-400 tracking-widest uppercase">
+              Hello, I'm
+            </h2>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight text-white leading-tight">
+              SATHYADEVAN <span class="text-gradient">G</span>
+            </h1>
+            <div class="h-10 flex items-center justify-center lg:justify-start">
+              <span class="text-xl sm:text-2xl lg:text-3xl font-heading font-semibold text-slate-300">
+                <span id="typewriter-text" class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 border-r-2 border-cyan-400 pr-1"></span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Concise Summary / Pitch -->
+          <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <strong class="text-white font-semibold">B.Tech IT Graduate</strong> with deep hands-on expertise in <span class="text-cyan-300">server handling</span>, <span class="text-cyan-300">Cisco CCNA networking</span>, <span class="text-cyan-300">hardware diagnostics</span>, and enterprise <span class="text-cyan-300">remote IT administration</span>. Passionate about architecting high-reliability IT infrastructure and optimizing system workflows.
+          </p>
+
+          <!-- Contact Mini Row -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2 text-xs font-mono-code text-slate-400">
+            <span class="flex items-center gap-1.5 bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-800">
+              <i data-lucide="mail" class="w-3.5 h-3.5 text-cyan-400"></i>
+              sathyadev28ae@gmail.com
+            </span>
+            <span class="flex items-center gap-1.5 bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-800">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-purple-400"></i>
+              Karur, Tamil Nadu
+            </span>
+          </div>
+
+          <!-- Hero Buttons -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+            <a href="#projects" class="btn-neon-cyan px-6 py-3.5 rounded-xl font-heading font-bold text-sm flex items-center gap-2">
+              <i data-lucide="layers" class="w-4 h-4"></i>
+              <span>Explore Projects</span>
+            </a>
+            <button id="open-resume-modal" class="btn-neon-purple px-6 py-3.5 rounded-xl font-heading font-bold text-sm flex items-center gap-2">
+              <i data-lucide="file-check-2" class="w-4 h-4"></i>
+              <span>View Full Resume</span>
+            </button>
+            <a href="https://github.com/devop2000" target="_blank" rel="noopener noreferrer" class="btn-glass px-4 py-3.5 rounded-xl text-sm font-semibold flex items-center gap-2" title="GitHub Profile">
+              <i data-lucide="github" class="w-4 h-4 text-slate-200"></i>
+              <span class="hidden sm:inline">GitHub</span>
+            </a>
+            <a href="https://www.linkedin.com/in/sathya-devan-g-221807sa/" target="_blank" rel="noopener noreferrer" class="btn-glass px-4 py-3.5 rounded-xl text-sm font-semibold flex items-center gap-2" title="LinkedIn Profile">
+              <i data-lucide="linkedin" class="w-4 h-4 text-blue-400"></i>
+              <span class="hidden sm:inline">LinkedIn</span>
+            </a>
+          </div>
+
+          <!-- Quick Stats Row -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-slate-800/80">
+            <div class="glass-panel p-3.5 rounded-2xl text-center">
+              <div class="text-2xl font-black font-heading text-cyan-400">CCNA</div>
+              <div class="text-[11px] text-slate-400 uppercase tracking-wider font-mono-code">Routing & Switch</div>
+            </div>
+            <div class="glass-panel p-3.5 rounded-2xl text-center">
+              <div class="text-2xl font-black font-heading text-emerald-400">B.Tech</div>
+              <div class="text-[11px] text-slate-400 uppercase tracking-wider font-mono-code">IT Graduate '24</div>
+            </div>
+            <div class="glass-panel p-3.5 rounded-2xl text-center">
+              <div class="text-2xl font-black font-heading text-purple-400">500+</div>
+              <div class="text-[11px] text-slate-400 uppercase tracking-wider font-mono-code">Lab Hours</div>
+            </div>
+            <div class="glass-panel p-3.5 rounded-2xl text-center">
+              <div class="text-2xl font-black font-heading text-amber-400">100%</div>
+              <div class="text-[11px] text-slate-400 uppercase tracking-wider font-mono-code">Hardware / Remote</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Right: 3D Holographic Photo Showcase -->
+        <div class="lg:col-span-5 flex flex-col items-center justify-center">
+          <div class="photo-card-container w-full max-w-[340px] sm:max-w-[380px] aspect-[4/5] relative">
+            
+            <!-- Orbiting Glow Ring -->
+            <div class="orbit-ring"></div>
+
+            <!-- 3D Parallax Tilt Card -->
+            <div class="photo-3d-card w-full h-full p-4 flex flex-col justify-between">
+              
+              <!-- Top Card Bar -->
+              <div class="flex items-center justify-between pb-3 border-b border-cyan-500/20 text-xs font-mono-code text-cyan-400">
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                  SYSTEM_STATUS: READY
+                </span>
+                <span class="text-slate-400">ID: SG-2024-IT</span>
+              </div>
+
+              <!-- Inner Frame with Hologram Glare & Scanlines -->
+              <div class="photo-frame-inner relative flex-1 my-2 bg-slate-950 border border-slate-800 flex items-center justify-center">
+                <div class="holo-glare"></div>
+                <div class="scanline-effect"></div>
+                
+                <!-- Main Profile Image / Vector Avatar -->
+                <img 
+                  id="hero-profile-photo"
+                  src="assets/images/profile.jpg" 
+                  data-default-src="assets/images/profile.jpg"
+                  alt="Sathyadevan G - IT Support & Network Engineer" 
+                  class="photo-img"
+                />
+
+                <!-- Holographic Corner Accents -->
+                <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-cyan-400 pointer-events-none"></div>
+                <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-cyan-400 pointer-events-none"></div>
+                <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-cyan-400 pointer-events-none"></div>
+                <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-cyan-400 pointer-events-none"></div>
+              </div>
+
+              <!-- Bottom Card Tag -->
+              <div class="pt-2 text-center">
+                <span class="font-heading font-extrabold text-sm tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-purple-300">
+                  SATHYADEVAN G
+                </span>
+                <p class="text-[11px] font-mono-code text-slate-400">IT SUPPORT • CCNA • HARDWARE</p>
+              </div>
+
+              <!-- Floating 3D Depth Chips (Parallax popped out) -->
+              <div class="floating-chip floating-chip-left">
+                <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+                <span class="text-xs text-emerald-300">CCNA Trained</span>
+              </div>
+
+              <div class="floating-chip floating-chip-right">
+                <i data-lucide="server" class="w-4 h-4 text-cyan-400"></i>
+                <span class="text-xs text-cyan-300">Server & LAN</span>
+              </div>
+
+              <div class="floating-chip floating-chip-bottom">
+                <i data-lucide="cpu" class="w-4 h-4 text-purple-400"></i>
+                <span class="text-xs text-purple-300">Systech Academy Certified</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         ABOUT & CAREER OBJECTIVE SECTION
+         ========================================================================== -->
+    <section id="about" class="py-20 px-4 lg:px-8 max-w-7xl mx-auto w-full">
+      <div class="text-center space-y-3 mb-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono-code">
+          <i data-lucide="user" class="w-3.5 h-3.5"></i>
+          <span>PROFILE & ACADEMIC FOUNDATION</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-white">
+          About Me & <span class="text-gradient">Career Objective</span>
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Objective & Core Philosophy -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="glass-panel p-6 sm:p-8 rounded-3xl relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-800">
+              <div class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl p-[2px] bg-gradient-to-tr from-cyan-400 via-blue-500 to-purple-500 shadow-xl shadow-cyan-500/20 shrink-0">
+                <img src="assets/images/profile.jpg" alt="Sathyadevan G" class="w-full h-full rounded-2xl object-cover object-top" />
+                <span class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-400 border-2 border-[#07090e] rounded-full flex items-center justify-center">
+                  <span class="w-1.5 h-1.5 bg-white rounded-full"></span>
+                </span>
+              </div>
+              <div>
+                <h3 class="text-xl sm:text-2xl font-heading font-extrabold text-white">SATHYADEVAN G</h3>
+                <p class="text-cyan-400 text-xs sm:text-sm font-mono-code font-semibold">B.Tech IT Graduate • CCNA Trained</p>
+                <p class="text-[11px] text-slate-400 font-mono-code mt-0.5">📍 Karur, Tamil Nadu, India</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+              <div class="p-2 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+                <i data-lucide="target" class="w-4 h-4"></i>
+              </div>
+              <h4 class="text-base font-heading font-bold text-white">Career Objective</h4>
+            </div>
+
+            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+              "B.Tech IT graduate with a foundation in servers, networking, and system administration. Looking for an opportunity to apply my skills in a professional IT environment. Hands-on experience in server handling, network setup, and basic security practices. Eager to learn, adapt, and contribute to efficient IT operations."
+            </p>
+
+            <div class="mt-6 pt-6 border-t border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+              <div class="flex items-start gap-2.5 text-slate-300">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                <span>Fast learner capable of rapid technical ramp-up</span>
+              </div>
+              <div class="flex items-start gap-2.5 text-slate-300">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                <span>Systematic root-cause hardware/network troubleshooting</span>
+              </div>
+              <div class="flex items-start gap-2.5 text-slate-300">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-400 shrink-0 mt-0.5"></i>
+                <span>Hands-on server deployment & peripheral setup</span>
+              </div>
+              <div class="flex items-start gap-2.5 text-slate-300">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+                <span>Strong team communication & user empathy</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Information Card -->
+          <div class="glass-panel p-6 rounded-3xl">
+            <h4 class="font-heading font-bold text-base text-white mb-4 flex items-center gap-2">
+              <i data-lucide="id-card" class="w-4 h-4 text-cyan-400"></i>
+              <span>Direct Contact Details</span>
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <span class="text-slate-400 block mb-1">Email Address</span>
+                <span class="font-semibold text-slate-200 select-all">sathyadev28ae@gmail.com</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <span class="text-slate-400 block mb-1">GitHub Portfolio</span>
+                <span class="font-semibold text-slate-200">github.com/devop2000</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <span class="text-slate-400 block mb-1">Location</span>
+                <span class="font-semibold text-slate-200">Karur, Tamil Nadu, India</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <span class="text-slate-400 block mb-1">Open To Relocation</span>
+                <span class="font-semibold text-emerald-400">Yes (Immediate Joiner)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education Timeline -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="glass-panel p-6 sm:p-8 rounded-3xl">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="p-2.5 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-heading font-bold text-white">Education History</h3>
+                <p class="text-xs font-mono-code text-slate-400">Formal Engineering & Technical Qualifications</p>
+              </div>
+            </div>
+
+            <!-- Timeline Elements -->
+            <div class="relative pl-6 border-l-2 border-cyan-500/30 space-y-8">
+              
+              <!-- Item 1: B.Tech IT -->
+              <div class="timeline-item relative">
+                <div class="absolute -left-[35px] top-1 timeline-dot"></div>
+                <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 transition-all">
+                  <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                    <span class="px-2.5 py-0.5 rounded-md bg-cyan-500/20 text-cyan-300 text-[11px] font-mono-code font-bold">
+                      Graduated: May 2024
+                    </span>
+                    <span class="text-xs text-slate-400">4 Years Degree</span>
+                  </div>
+                  <h4 class="text-base sm:text-lg font-heading font-bold text-white">
+                    Bachelor of Technology in Information Technology
+                  </h4>
+                  <p class="text-cyan-400 text-sm font-medium mt-0.5">
+                    DS Engineering College, Perambalur, Tamil Nadu
+                  </p>
+                  <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                    Focused on Computer Networks, Operating Systems, Database Management Systems, Network Security, Server Administration, and System Software.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Item 2: Diploma EEE -->
+              <div class="timeline-item relative">
+                <div class="absolute -left-[35px] top-1 timeline-dot"></div>
+                <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-purple-500/40 transition-all">
+                  <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                    <span class="px-2.5 py-0.5 rounded-md bg-purple-500/20 text-purple-300 text-[11px] font-mono-code font-bold">
+                      Graduated: April 2018
+                    </span>
+                    <span class="text-xs text-slate-400">3 Years Diploma</span>
+                  </div>
+                  <h4 class="text-base sm:text-lg font-heading font-bold text-white">
+                    Diploma in Electrical and Electronics Engineering
+                  </h4>
+                  <p class="text-purple-400 text-sm font-medium mt-0.5">
+                    Sita Rajaram Polytechnic College, Karur, Tamil Nadu
+                  </p>
+                  <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                    Gained deep foundations in circuit analysis, hardware components, power electronics, digital logic, PCB testing, and electrical troubleshooting.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         WORK EXPERIENCE & INTERNSHIPS
+         ========================================================================== -->
+    <section id="experience" class="py-20 px-4 lg:px-8 max-w-7xl mx-auto w-full">
+      <div class="text-center space-y-3 mb-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono-code">
+          <i data-lucide="briefcase" class="w-3.5 h-3.5"></i>
+          <span>PROFESSIONAL INDUSTRY TRAINING</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-white">
+          Work & <span class="text-gradient-emerald">Internship Experience</span>
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-emerald-400 to-cyan-500 mx-auto rounded-full"></div>
+      </div>
+
+      <!-- Experience Card -->
+      <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-emerald-500/30 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
+              <i data-lucide="network" class="w-7 h-7"></i>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-2">
+                <h3 class="text-2xl font-heading font-bold text-white">IT Support Intern</h3>
+                <span class="px-3 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-mono-code font-bold">
+                  Internship
+                </span>
+              </div>
+              <p class="text-base font-semibold text-emerald-400 mt-1">Daphne Infotech</p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 font-mono-code text-xs">
+            <span class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 flex items-center gap-1.5">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-cyan-400"></i>
+              Tamil Nadu, India
+            </span>
+          </div>
+        </div>
+
+        <!-- Core Modules Covered -->
+        <div class="my-6">
+          <h4 class="text-xs font-mono-code uppercase tracking-wider text-slate-400 mb-3">Core Training Modules Mastered:</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+              <div class="flex items-center gap-2 text-cyan-400 font-bold text-sm mb-1">
+                <i data-lucide="wrench" class="w-4 h-4"></i>
+                <span>CompTIA A+ Module</span>
+              </div>
+              <p class="text-xs text-slate-300">PC Hardware assembly, motherboard diagnostics, peripheral setup, power supplies, thermal management & OS installation.</p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+              <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm mb-1">
+                <i data-lucide="wifi" class="w-4 h-4"></i>
+                <span>CompTIA N+ Module</span>
+              </div>
+              <p class="text-xs text-slate-300">Networking fundamentals, OSI & TCP/IP models, Ethernet cabling, IP addressing (IPv4/IPv6), subnetting, DHCP & DNS config.</p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+              <div class="flex items-center gap-2 text-purple-400 font-bold text-sm mb-1">
+                <i data-lucide="server" class="w-4 h-4"></i>
+                <span>CCNA Routing & Switching</span>
+              </div>
+              <p class="text-xs text-slate-300">Cisco router & switch configuration, VLAN segmentation, inter-VLAN routing, NAT/PAT, ACLs, and switch port security.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Responsibilities & Achievements -->
+        <div class="space-y-3 pt-2">
+          <h4 class="text-xs font-mono-code uppercase tracking-wider text-slate-400 mb-3">Hands-On Responsibilities & Impact:</h4>
+          <ul class="space-y-2.5 text-sm text-slate-300">
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-400 mt-1">▹</span>
+              <span>Completed intensive technical internship training spanning hardware troubleshooting, enterprise network setup, and multi-tier IT support workflows.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-400 mt-1">▹</span>
+              <span>Conducted end-to-end PC assembly, component replacements (RAM, SSD/NVMe, GPU, PSU), BIOS/UEFI updates, and clean OS deployments across Windows 10/11 environments.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-400 mt-1">▹</span>
+              <span>Configured and tested local area networks (LANs), wired patch panels, crimped RJ45 Cat6 cables, and diagnosed network connectivity, packet loss, and IP conflicts.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-400 mt-1">▹</span>
+              <span>Utilized remote support tools (AnyDesk, RDP) to assist users with software installation, driver conflicts, printer sharing, and anti-virus configuration.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-400 mt-1">▹</span>
+              <span>Documented network topologies, hardware inventory logs, and standard operating procedures (SOPs) for routine maintenance and rapid issue escalation.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CERTIFICATIONS & TRAININGS
+         ========================================================================== -->
+    <section id="certifications" class="py-20 px-4 lg:px-8 max-w-7xl mx-auto w-full">
+      <div class="text-center space-y-3 mb-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-xs font-mono-code">
+          <i data-lucide="award" class="w-3.5 h-3.5"></i>
+          <span>CREDENTIALS & SPECIALIZED ACADEMIES</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-white">
+          Certifications & <span class="text-gradient">Trainings</span>
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-500 mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Cert 1: CCNA -->
+        <div class="glass-panel p-6 rounded-3xl tilt-card border border-cyan-500/30 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-2xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
+                <i data-lucide="shield-check" class="w-6 h-6"></i>
+              </div>
+              <span class="px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-[11px] font-mono-code font-bold">
+                Cisco Certified
+              </span>
+            </div>
+            
+            <h3 class="text-xl font-heading font-bold text-white group-hover:text-cyan-400 transition-colors">
+              CCNA (Cisco Certified Network Associate)
+            </h3>
+            <p class="text-sm font-semibold text-cyan-400 mt-1">Systech Network Academy</p>
+            <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+              Comprehensive routing & switching credential covering IPv4/IPv6 addressing, OSPF, VLANs, trunking, spanning-tree protocol, access control lists (ACLs), NAT, and Cisco CLI commands.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-800 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 rounded-md bg-slate-900 text-slate-300 text-[10px] font-mono-code">Routing & Switching</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-900 text-slate-300 text-[10px] font-mono-code">VLAN / OSPF</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-900 text-slate-300 text-[10px] font-mono-code">Cisco IOS</span>
+          </div>
+        </div>
+
+        <!-- Cert 2: Computer Hardware & Networking -->
+        <div class="glass-panel p-6 rounded-3xl tilt-card border border-emerald-500/30 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                <i data-lucide="cpu" class="w-6 h-6"></i>
+              </div>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-mono-code font-bold">
+                Hardware Specialist
+              </span>
+            </div>
+            
+            <h3 class="text-xl font-heading font-bold text-white group-hover:text-emerald-400 transition-colors">
+              Computer Hardware & Networking
+            </h3>
+            <p class="text-sm font-semibold text-emerald-400 mt-1">Systech Network Academy</p>
+            <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+              In-depth hands-on certification in PC building, component level diagnostics, power supply testing, motherboards, storage arrays, Windows deployment, and LAN infrastructure setup.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-800 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 rounded-md bg-slate-900 text-slate-300 text-[10px] font-mono-code">PC Assembly</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-900 text-slate-300 text-[10px] font-mono-code">LAN Cabling</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-900 text-slate-300 text-[10px] font-mono-code">Troubleshooting</span>
+          </div>
+        </div>
+
+        <!-- Cert 3: Daphne Infotech Practical Modules -->
+        <div class="glass-panel p-6 rounded-3xl tilt-card border border-purple-500/30 flex flex-col justify-between group md:col-span-2 lg:col-span-1">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400">
+                <i data-lucide="laptop" class="w-6 h-6"></i>
+              </div>
+              <span class="px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 text-[11px] font-mono-code font-bold">
+                Industry Internship
+              </span>
+            </div>
+            
+            <h3 class="text-xl font-heading font-bold text-white group-hover:text-purple-400 transition-colors">
+              A+, N+ & CCNA Internship Modules
+            </h3>
+            <p class="text-sm font-semibold text-purple-400 mt-1">Daphne Infotech</p>
+            <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+              Real-world simulated enterprise training covering remote support tools, client-server network topologies, peripheral management, application troubleshooting, and user helpdesk tickets.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-800 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 rounded-md bg-slate-900 text-slate-300 text-[10px] font-mono-code">A+ Hardware</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-900 text-slate-300 text-[10px] font-mono-code">N+ Networking</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-900 text-slate-300 text-[10px] font-mono-code">AnyDesk / RDP</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         KEY SKILLS MATRIX (Categorized & Interactive)
+         ========================================================================== -->
+    <section id="skills" class="py-20 px-4 lg:px-8 max-w-7xl mx-auto w-full">
+      <div class="text-center space-y-3 mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono-code">
+          <i data-lucide="code-2" class="w-3.5 h-3.5"></i>
+          <span>TECHNICAL & INTERPERSONAL PROFICIENCY</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-white">
+          Key Skills & <span class="text-gradient">Competencies</span>
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full"></div>
+      </div>
+
+      <!-- Skill Category Filters -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
+        <button class="skill-filter-btn active px-4 py-2 rounded-xl text-xs font-semibold font-mono-code bg-cyan-500/20 text-cyan-300 border border-cyan-500 transition-all" data-filter="all">
+          All Skills (16)
+        </button>
+        <button class="skill-filter-btn px-4 py-2 rounded-xl text-xs font-semibold font-mono-code btn-glass text-slate-300 hover:text-cyan-400 transition-all" data-filter="networking">
+          Networking & CCNA
+        </button>
+        <button class="skill-filter-btn px-4 py-2 rounded-xl text-xs font-semibold font-mono-code btn-glass text-slate-300 hover:text-cyan-400 transition-all" data-filter="hardware">
+          Hardware & Systems
+        </button>
+        <button class="skill-filter-btn px-4 py-2 rounded-xl text-xs font-semibold font-mono-code btn-glass text-slate-300 hover:text-cyan-400 transition-all" data-filter="software">
+          OS & Remote Support
+        </button>
+        <button class="skill-filter-btn px-4 py-2 rounded-xl text-xs font-semibold font-mono-code btn-glass text-slate-300 hover:text-cyan-400 transition-all" data-filter="softskills">
+          Soft Skills & Operations
+        </button>
+      </div>
+
+      <!-- Skills Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="skills-grid">
+        
+        <!-- Skill 1: Operating Systems -->
+        <div class="skill-card-item glass-panel p-6 rounded-3xl transition-all duration-300" data-category="software">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="monitor" class="w-5 h-5 text-cyan-400"></i>
+              <h4 class="font-heading font-bold text-white">Operating Systems</h4>
+            </div>
+            <span class="text-xs font-mono-code text-cyan-400 font-bold">95%</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-3">Windows 10, Windows 11 Pro, Windows Server, Basic Linux commands.</p>
+          <div class="progress-container">
+            <div class="progress-bar-fill bg-gradient-to-r from-cyan-500 to-blue-500" style="width: 95%"></div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Win 10/11</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Win Server</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Linux CLI</span>
+          </div>
+        </div>
+
+        <!-- Skill 2: Hardware Support & Diagnostics -->
+        <div class="skill-card-item glass-panel p-6 rounded-3xl transition-all duration-300" data-category="hardware">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="cpu" class="w-5 h-5 text-emerald-400"></i>
+              <h4 class="font-heading font-bold text-white">Hardware Support</h4>
+            </div>
+            <span class="text-xs font-mono-code text-emerald-400 font-bold">92%</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-3">PC custom assembly, component repair, RAM/SSD diagnostics, peripheral configs.</p>
+          <div class="progress-container">
+            <div class="progress-bar-fill bg-gradient-to-r from-emerald-500 to-teal-400" style="width: 92%"></div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">PC Assembly</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">BIOS/UEFI</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Thermal Mgmt</span>
+          </div>
+        </div>
+
+        <!-- Skill 3: Networking & Protocols -->
+        <div class="skill-card-item glass-panel p-6 rounded-3xl transition-all duration-300" data-category="networking">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="network" class="w-5 h-5 text-cyan-400"></i>
+              <h4 class="font-heading font-bold text-white">Networking (LAN/WAN)</h4>
+            </div>
+            <span class="text-xs font-mono-code text-cyan-400 font-bold">90%</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-3">Basic LAN/WAN setup, IPv4/IPv6 addressing, Subnetting (VLSM), DHCP, DNS config.</p>
+          <div class="progress-container">
+            <div class="progress-bar-fill bg-gradient-to-r from-cyan-400 to-indigo-500" style="width: 90%"></div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Subnetting</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">DHCP/DNS</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Cat6 Cabling</span>
+          </div>
+        </div>
+
+        <!-- Skill 4: CCNA Routing & Switching -->
+        <div class="skill-card-item glass-panel p-6 rounded-3xl transition-all duration-300" data-category="networking">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="radio" class="w-5 h-5 text-purple-400"></i>
+              <h4 class="font-heading font-bold text-white">CCNA & Switch Config</h4>
+            </div>
+            <span class="text-xs font-mono-code text-purple-400 font-bold">88%</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-3">Cisco CLI, 802.1Q VLANs, VTP, Inter-VLAN routing, OSPF, ACL security rules.</p>
+          <div class="progress-container">
+            <div class="progress-bar-fill bg-gradient-to-r from-purple-500 to-pink-500" style="width: 88%"></div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">VLANs / Trunks</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">OSPF Routing</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">ACLs</span>
+          </div>
+        </div>
+
+        <!-- Skill 5: Remote Support Tools -->
+        <div class="skill-card-item glass-panel p-6 rounded-3xl transition-all duration-300" data-category="software">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="cast" class="w-5 h-5 text-amber-400"></i>
+              <h4 class="font-heading font-bold text-white">Remote Support Tools</h4>
+            </div>
+            <span class="text-xs font-mono-code text-amber-400 font-bold">96%</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-3">AnyDesk, Remote Desktop Protocol (RDP), TeamViewer, Quick Assist helpdesk.</p>
+          <div class="progress-container">
+            <div class="progress-bar-fill bg-gradient-to-r from-amber-500 to-orange-500" style="width: 96%"></div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">AnyDesk</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">RDP</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">TeamViewer</span>
+          </div>
+        </div>
+
+        <!-- Skill 6: Software Support & Applications -->
+        <div class="skill-card-item glass-panel p-6 rounded-3xl transition-all duration-300" data-category="software">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="package-check" class="w-5 h-5 text-blue-400"></i>
+              <h4 class="font-heading font-bold text-white">Software Support</h4>
+            </div>
+            <span class="text-xs font-mono-code text-blue-400 font-bold">94%</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-3">Enterprise application installs, license configs, driver troubleshooting, antivirus setup.</p>
+          <div class="progress-container">
+            <div class="progress-bar-fill bg-gradient-to-r from-blue-500 to-cyan-400" style="width: 94%"></div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">App Deployment</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Driver Patches</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">MS Office 365</span>
+          </div>
+        </div>
+
+        <!-- Skill 7: IT Security & Admin Basics -->
+        <div class="skill-card-item glass-panel p-6 rounded-3xl transition-all duration-300" data-category="networking">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="lock" class="w-5 h-5 text-rose-400"></i>
+              <h4 class="font-heading font-bold text-white">Security & Admin</h4>
+            </div>
+            <span class="text-xs font-mono-code text-rose-400 font-bold">86%</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-3">Basic firewall configuration, NAT rules, user access permissions, port security.</p>
+          <div class="progress-container">
+            <div class="progress-bar-fill bg-gradient-to-r from-rose-500 to-pink-500" style="width: 86%"></div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Firewall Rules</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">NAT / PAT</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Port Security</span>
+          </div>
+        </div>
+
+        <!-- Skill 8: Soft Skills & Team Collaboration -->
+        <div class="skill-card-item glass-panel p-6 rounded-3xl transition-all duration-300" data-category="softskills">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="users" class="w-5 h-5 text-emerald-400"></i>
+              <h4 class="font-heading font-bold text-white">Soft Skills & Communication</h4>
+            </div>
+            <span class="text-xs font-mono-code text-emerald-400 font-bold">95%</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-3">End-user empathy, active listening, helpdesk documentation, agile teamwork.</p>
+          <div class="progress-container">
+            <div class="progress-bar-fill bg-gradient-to-r from-emerald-400 to-cyan-500" style="width: 95%"></div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Helpdesk Empathy</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Problem Solving</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Documentation</span>
+          </div>
+        </div>
+
+        <!-- Skill 9: Problem Solving & Critical Thinking -->
+        <div class="skill-card-item glass-panel p-6 rounded-3xl transition-all duration-300" data-category="softskills">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="lightbulb" class="w-5 h-5 text-amber-400"></i>
+              <h4 class="font-heading font-bold text-white">Problem Solving</h4>
+            </div>
+            <span class="text-xs font-mono-code text-amber-400 font-bold">92%</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-3">Analytical mindset for isolating network failures, BSOD crashes, and hardware faults.</p>
+          <div class="progress-container">
+            <div class="progress-bar-fill bg-gradient-to-r from-amber-400 to-yellow-500" style="width: 92%"></div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Root Cause Analysis</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Fast Escalation</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-slate-300 text-[11px]">Adaptability</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         DETAILED PROJECTS SHOWCASE
+         ========================================================================== -->
+    <section id="projects" class="py-20 px-4 lg:px-8 max-w-7xl mx-auto w-full">
+      <div class="text-center space-y-3 mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-xs font-mono-code">
+          <i data-lucide="folder-git-2" class="w-3.5 h-3.5"></i>
+          <span>HANDS-ON LAB & INFRASTRUCTURE CAPSTONES</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-white">
+          Featured IT & <span class="text-gradient">Networking Projects</span>
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-500 mx-auto rounded-full"></div>
+      </div>
+
+      <!-- Project Filters -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
+        <button class="project-filter-btn active px-4 py-2 rounded-xl text-xs font-semibold font-mono-code bg-purple-500/20 text-purple-300 border border-purple-500 transition-all" data-filter="all">
+          All Projects (4)
+        </button>
+        <button class="project-filter-btn px-4 py-2 rounded-xl text-xs font-semibold font-mono-code btn-glass text-slate-300 hover:text-purple-300 transition-all" data-filter="networking">
+          Networking & CCNA
+        </button>
+        <button class="project-filter-btn px-4 py-2 rounded-xl text-xs font-semibold font-mono-code btn-glass text-slate-300 hover:text-purple-300 transition-all" data-filter="support">
+          IT Support & OS
+        </button>
+        <button class="project-filter-btn px-4 py-2 rounded-xl text-xs font-semibold font-mono-code btn-glass text-slate-300 hover:text-purple-300 transition-all" data-filter="hardware">
+          Hardware & Lab
+        </button>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid">
+        
+        <!-- Project 1 -->
+        <div class="project-card-item glass-panel rounded-3xl p-6 sm:p-8 tilt-card border border-cyan-500/30 flex flex-col justify-between group" data-category="networking" data-project-id="proj1">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-mono-code font-bold">
+                CCNA / Cisco Packet Tracer
+              </span>
+              <span class="text-xs text-slate-400 font-mono-code">2024</span>
+            </div>
+
+            <h3 class="text-2xl font-heading font-bold text-white group-hover:text-cyan-400 transition-colors">
+              Enterprise LAN & Subnetting Infrastructure Design
+            </h3>
+            
+            <div class="my-3 flex items-center gap-2 text-xs font-medium text-slate-300">
+              <span class="text-cyan-400 font-semibold">Role:</span> Network Designer & Administrator
+            </div>
+
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Architected a multi-department enterprise campus network simulation with VLAN segmentation (802.1Q), inter-VLAN routing, dynamic OSPF routing, centralized DHCP scope pools, and Access Control Lists.
+            </p>
+
+            <div class="space-y-1.5 text-xs text-slate-300 mb-6 bg-slate-900/60 p-3.5 rounded-2xl border border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="text-cyan-400 font-bold">✓</span>
+                <span>Segmented 4 enterprise departments (HR, Engineering, IT, Finance)</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-cyan-400 font-bold">✓</span>
+                <span>Layer 3 OSPF routing with sub-2 second convergence</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-cyan-300">Cisco Packet Tracer</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-cyan-300">VLANs</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-cyan-300">OSPF</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-cyan-300">ACLs</span>
+            </div>
+
+            <button class="view-project-btn w-full btn-glass py-3 rounded-xl text-xs font-bold text-cyan-400 hover:bg-cyan-500/20 hover:border-cyan-400 flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+              <span>View Architecture & Full Breakdown</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card-item glass-panel rounded-3xl p-6 sm:p-8 tilt-card border border-emerald-500/30 flex flex-col justify-between group" data-category="support" data-project-id="proj2">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-mono-code font-bold">
+                IT Support & Automation
+              </span>
+              <span class="text-xs text-slate-400 font-mono-code">2025</span>
+            </div>
+
+            <h3 class="text-2xl font-heading font-bold text-white group-hover:text-emerald-400 transition-colors">
+              Automated OS Deployment & Remote Helpdesk System
+            </h3>
+            
+            <div class="my-3 flex items-center gap-2 text-xs font-medium text-slate-300">
+              <span class="text-emerald-400 font-semibold">Role:</span> IT Support Specialist & Systems Tech
+            </div>
+
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Developed a rapid PC provisioning framework and remote helpdesk protocol combining PowerShell/Batch setup scripts, standardized software packages, and secure AnyDesk/RDP remote tunnels.
+            </p>
+
+            <div class="space-y-1.5 text-xs text-slate-300 mb-6 bg-slate-900/60 p-3.5 rounded-2xl border border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">✓</span>
+                <span>Reduced OS deployment & standard app setup time by 40%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">✓</span>
+                <span>Standardized remote ticket diagnosis and Event Viewer monitoring</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-emerald-300">Windows Server</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-emerald-300">PowerShell</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-emerald-300">AnyDesk</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-emerald-300">RDP</span>
+            </div>
+
+            <button class="view-project-btn w-full btn-glass py-3 rounded-xl text-xs font-bold text-emerald-400 hover:bg-emerald-500/20 hover:border-emerald-400 flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+              <span>View Architecture & Full Breakdown</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card-item glass-panel rounded-3xl p-6 sm:p-8 tilt-card border border-purple-500/30 flex flex-col justify-between group" data-category="hardware" data-project-id="proj3">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-mono-code font-bold">
+                Hardware Assembly & Lab
+              </span>
+              <span class="text-xs text-slate-400 font-mono-code">2024</span>
+            </div>
+
+            <h3 class="text-2xl font-heading font-bold text-white group-hover:text-purple-400 transition-colors">
+              Multi-Node Server Lab & Hardware Benchmarking Station
+            </h3>
+            
+            <div class="my-3 flex items-center gap-2 text-xs font-medium text-slate-300">
+              <span class="text-purple-400 font-semibold">Role:</span> Hardware & Systems Assembly Engineer
+            </div>
+
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Constructed custom multi-node test rigs with hardware RAID arrays, optimized thermal airflow, BIOS firmware flashing, and comprehensive memory/stress diagnostics (MemTest86, CrystalDisk).
+            </p>
+
+            <div class="space-y-1.5 text-xs text-slate-300 mb-6 bg-slate-900/60 p-3.5 rounded-2xl border border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="text-purple-400 font-bold">✓</span>
+                <span>Configured RAID 1 and RAID 5 fault-tolerant storage arrays</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-purple-400 font-bold">✓</span>
+                <span>Simulated hardware drive failure recovery without data loss</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-purple-300">Custom Assembly</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-purple-300">RAID 1/5</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-purple-300">BIOS/UEFI</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-purple-300">MemTest86</span>
+            </div>
+
+            <button class="view-project-btn w-full btn-glass py-3 rounded-xl text-xs font-bold text-purple-400 hover:bg-purple-500/20 hover:border-purple-400 flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+              <span>View Architecture & Full Breakdown</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card-item glass-panel rounded-3xl p-6 sm:p-8 tilt-card border border-amber-500/30 flex flex-col justify-between group" data-category="networking" data-project-id="proj4">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-mono-code font-bold">
+                Network Security & Gateway
+              </span>
+              <span class="text-xs text-slate-400 font-mono-code">2024</span>
+            </div>
+
+            <h3 class="text-2xl font-heading font-bold text-white group-hover:text-amber-400 transition-colors">
+              Secure Office Network & Firewall Gateway Protection
+            </h3>
+            
+            <div class="my-3 flex items-center gap-2 text-xs font-medium text-slate-300">
+              <span class="text-amber-400 font-semibold">Role:</span> Network Security Associate
+            </div>
+
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Configured Port Address Translation (NAT/PAT) gateway, switch port security with MAC address limits and violation shutdown policies, Wi-Fi 6 AP authentication, and Wireshark traffic inspection.
+            </p>
+
+            <div class="space-y-1.5 text-xs text-slate-300 mb-6 bg-slate-900/60 p-3.5 rounded-2xl border border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="text-amber-400 font-bold">✓</span>
+                <span>Restricted rogue AP connections and spoofed MAC intrusions</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-amber-400 font-bold">✓</span>
+                <span>Enabled 100+ private hosts to securely route over single public IP</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-amber-300">NAT / PAT</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-amber-300">Port Security</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-amber-300">Wireshark</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code text-amber-300">Wi-Fi APs</span>
+            </div>
+
+            <button class="view-project-btn w-full btn-glass py-3 rounded-xl text-xs font-bold text-amber-400 hover:bg-amber-500/20 hover:border-amber-400 flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+              <span>View Architecture & Full Breakdown</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CONTACT & CONNECT SECTION
+         ========================================================================== -->
+    <section id="contact" class="py-20 px-4 lg:px-8 max-w-7xl mx-auto w-full">
+      <div class="text-center space-y-3 mb-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono-code">
+          <i data-lucide="send" class="w-3.5 h-3.5"></i>
+          <span>LET'S CONNECT</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-white">
+          Get In Touch & <span class="text-gradient">Hire Me</span>
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Contact Cards / Direct Links -->
+        <div class="lg:col-span-5 space-y-4">
+          
+          <!-- Email Card -->
+          <div class="glass-panel p-5 rounded-2xl flex items-center justify-between group hover:border-cyan-400 transition-all">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-xl bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                <i data-lucide="mail" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <div class="text-xs text-slate-400 font-mono-code">DIRECT EMAIL</div>
+                <div class="text-sm sm:text-base font-bold text-white">sathyadev28ae@gmail.com</div>
+              </div>
+            </div>
+            <button class="copy-email-btn p-2.5 rounded-xl btn-glass hover:text-cyan-400" title="Copy Email">
+              <i data-lucide="copy" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <!-- LinkedIn Card -->
+          <a href="https://www.linkedin.com/in/sathya-devan-g-221807sa/" target="_blank" rel="noopener noreferrer" class="glass-panel p-5 rounded-2xl flex items-center justify-between group hover:border-blue-400 transition-all block">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                <i data-lucide="linkedin" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <div class="text-xs text-slate-400 font-mono-code">LINKEDIN PROFILE</div>
+                <div class="text-sm sm:text-base font-bold text-white group-hover:text-blue-400 transition-colors">sathya-devan-g-221807sa</div>
+              </div>
+            </div>
+            <i data-lucide="external-link" class="w-4 h-4 text-slate-400 group-hover:text-blue-400"></i>
+          </a>
+
+          <!-- GitHub Card -->
+          <a href="https://github.com/devop2000" target="_blank" rel="noopener noreferrer" class="glass-panel p-5 rounded-2xl flex items-center justify-between group hover:border-purple-400 transition-all block">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400">
+                <i data-lucide="github" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <div class="text-xs text-slate-400 font-mono-code">GITHUB PORTFOLIO</div>
+                <div class="text-sm sm:text-base font-bold text-white group-hover:text-purple-400 transition-colors">github.com/devop2000</div>
+              </div>
+            </div>
+            <i data-lucide="external-link" class="w-4 h-4 text-slate-400 group-hover:text-purple-400"></i>
+          </a>
+
+        </div>
+
+        <!-- Quick Interactive Message Form -->
+        <div class="lg:col-span-7">
+          <div class="glass-panel p-6 sm:p-8 rounded-3xl relative">
+            <h3 class="text-xl font-heading font-bold text-white mb-2">Send an Instant Message</h3>
+            <p class="text-xs text-slate-400 mb-6">Have an opportunity or question? Fill in the details below to open directly in your mail client.</p>
+
+            <form id="contact-form" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1.5">
+                  <label class="text-xs font-mono-code text-slate-300" for="form-name">Your Name</label>
+                  <input type="text" id="form-name" required placeholder="e.g. HR / Tech Recruiter" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-sm text-white focus:outline-none focus:border-cyan-400 transition-all" />
+                </div>
+                <div class="space-y-1.5">
+                  <label class="text-xs font-mono-code text-slate-300" for="form-email">Your Email</label>
+                  <input type="email" id="form-email" required placeholder="name@company.com" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-sm text-white focus:outline-none focus:border-cyan-400 transition-all" />
+                </div>
+              </div>
+
+              <div class="space-y-1.5">
+                <label class="text-xs font-mono-code text-slate-300" for="form-subject">Subject</label>
+                <input type="text" id="form-subject" required placeholder="Job Opportunity: IT Support / Network Engineer" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-sm text-white focus:outline-none focus:border-cyan-400 transition-all" />
+              </div>
+
+              <div class="space-y-1.5">
+                <label class="text-xs font-mono-code text-slate-300" for="form-message">Message</label>
+                <textarea id="form-message" rows="4" required placeholder="Hi Sathyadevan, we have an open IT position matching your skills..." class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-sm text-white focus:outline-none focus:border-cyan-400 transition-all resize-none"></textarea>
+              </div>
+
+              <button type="submit" class="w-full btn-neon-cyan py-3.5 rounded-xl font-heading font-bold text-sm flex items-center justify-center gap-2">
+                <i data-lucide="send" class="w-4 h-4"></i>
+                <span>Send Message Directly</span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FOOTER
+         ========================================================================== -->
+    <footer class="mt-auto border-t border-slate-800/80 bg-[#05070b] py-8 px-4 lg:px-8 text-xs text-slate-400">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <span class="font-heading font-bold text-white">SATHYADEVAN G</span>
+          <span>•</span>
+          <span>© 2024-2026 IT Portfolio</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="https://github.com/devop2000" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors">GitHub</a>
+          <a href="https://www.linkedin.com/in/sathya-devan-g-221807sa/" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors">LinkedIn</a>
+          <a href="#hero" class="hover:text-cyan-400 transition-colors flex items-center gap-1">
+            <span>Back to Top</span>
+            <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ==========================================================================
+       ATS RESUME PREVIEW & PRINT MODAL
+       ========================================================================== -->
+  <div id="resume-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+      
+      <!-- Modal Header -->
+      <div class="p-4 sm:p-6 border-b border-slate-800 flex items-center justify-between bg-slate-950/80 no-print">
+        <div class="flex items-center gap-3">
+          <div class="p-2 rounded-xl bg-cyan-500/20 text-cyan-400">
+            <i data-lucide="file-text" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-heading font-bold text-white">Professional ATS Resume Preview</h3>
+            <p class="text-xs font-mono-code text-slate-400">Print or Save as PDF for Job Applications</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="copy-resume-btn" class="btn-glass px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5" title="Copy Plain Text">
+            <i data-lucide="copy" class="w-3.5 h-3.5 text-cyan-400"></i>
+            <span>Copy Text</span>
+          </button>
+          <button id="print-resume-btn" class="btn-neon-cyan px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+            <span>Print / Save PDF</span>
+          </button>
+          <button id="close-resume-modal" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Printable Resume Content -->
+      <div class="p-6 sm:p-10 overflow-y-auto resume-print-area space-y-6 text-slate-200">
+        
+        <!-- Header -->
+        <div class="border-b border-slate-700 pb-4 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div class="flex items-center gap-4">
+            <img src="assets/images/profile.jpg" alt="Sathyadevan G" class="w-16 h-16 rounded-2xl object-cover object-top border-2 border-cyan-400/60 shadow-md hidden sm:block" />
+            <div>
+              <h1 class="text-3xl font-heading font-black text-white">SATHYADEVAN G</h1>
+              <p class="text-cyan-400 font-semibold text-sm mt-1">Technology Aspirant | Information Technology</p>
+            </div>
+          </div>
+          <div class="text-xs space-y-1 text-slate-300 text-center sm:text-right font-mono-code">
+            <div>📍 Karur, Tamil Nadu, India</div>
+            <div>📧 sathyadev28ae@gmail.com</div>
+            <div>🔗 linkedin.com/in/sathya-devan-g-221807sa</div>
+            <div>🌐 github.com/devop2000</div>
+          </div>
+        </div>
+
+        <!-- Career Objective -->
+        <div>
+          <h3 class="text-sm font-mono-code font-bold uppercase tracking-wider text-cyan-400 border-b border-slate-800 pb-1 mb-2">
+            Career Objective
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            B.Tech IT graduate with a foundation in servers, networking, and system administration. Looking for an opportunity to apply my skills in a professional IT environment. Hands-on experience in server handling, network setup, and basic security practices. Eager to learn, adapt, and contribute to efficient IT operations.
+          </p>
+        </div>
+
+        <!-- Education -->
+        <div>
+          <h3 class="text-sm font-mono-code font-bold uppercase tracking-wider text-cyan-400 border-b border-slate-800 pb-1 mb-3">
+            Education
+          </h3>
+          <div class="space-y-3 text-xs sm:text-sm">
+            <div class="flex flex-col sm:flex-row justify-between">
+              <div>
+                <strong class="text-white block font-semibold">Bachelor of Technology in Information Technology</strong>
+                <span class="text-slate-400">DS Engineering College, Perambalur, Tamil Nadu</span>
+              </div>
+              <span class="font-mono-code text-cyan-300 text-xs mt-1 sm:mt-0">Graduated: May 2024</span>
+            </div>
+            <div class="flex flex-col sm:flex-row justify-between">
+              <div>
+                <strong class="text-white block font-semibold">Diploma in Electrical and Electronics Engineering</strong>
+                <span class="text-slate-400">Sita Rajaram Polytechnic College, Karur, Tamil Nadu</span>
+              </div>
+              <span class="font-mono-code text-purple-300 text-xs mt-1 sm:mt-0">Graduated: April 2018</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience & Internship -->
+        <div>
+          <h3 class="text-sm font-mono-code font-bold uppercase tracking-wider text-cyan-400 border-b border-slate-800 pb-1 mb-3">
+            Experience & Internships
+          </h3>
+          <div class="space-y-2 text-xs sm:text-sm">
+            <div class="flex flex-col sm:flex-row justify-between">
+              <strong class="text-white font-semibold">IT Support Intern – Daphne Infotech</strong>
+              <span class="font-mono-code text-emerald-300 text-xs">Internship Training</span>
+            </div>
+            <ul class="list-disc list-inside space-y-1 text-slate-300 text-xs sm:text-sm">
+              <li>Completed comprehensive internship training covering A+ (Hardware & Troubleshooting), N+ (Networking Fundamentals), and CCNA (Routing & Switching) modules.</li>
+              <li>Gained hands-on experience in network configuration, routing & switching, hardware troubleshooting, and network issue resolution.</li>
+              <li>Handled end-user remote troubleshooting using AnyDesk and RDP for OS updates, application configurations, and network connectivity problems.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Key Skills -->
+        <div>
+          <h3 class="text-sm font-mono-code font-bold uppercase tracking-wider text-cyan-400 border-b border-slate-800 pb-1 mb-3">
+            Key Technical Skills
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-300">
+            <div>• <strong class="text-white">Operating Systems:</strong> Windows 10/11, Windows Server, Basic Linux</div>
+            <div>• <strong class="text-white">Hardware Support:</strong> PC assembly, troubleshooting, peripheral configuration</div>
+            <div>• <strong class="text-white">Networking:</strong> LAN/WAN setup, IPv4/IPv6, Subnetting, DHCP, DNS, CCNA</div>
+            <div>• <strong class="text-white">Software Support:</strong> Installation, configuration, troubleshooting</div>
+            <div>• <strong class="text-white">Remote Support Tools:</strong> AnyDesk, RDP, TeamViewer</div>
+            <div>• <strong class="text-white">Security Basics:</strong> NAT/PAT, Firewall rules, Switch Port Security</div>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div>
+          <h3 class="text-sm font-mono-code font-bold uppercase tracking-wider text-cyan-400 border-b border-slate-800 pb-1 mb-3">
+            Certifications & Trainings
+          </h3>
+          <ul class="list-disc list-inside space-y-1 text-xs sm:text-sm text-slate-300">
+            <li><strong class="text-white">Computer Hardware & Networking</strong> – Systech Network Academy</li>
+            <li><strong class="text-white">CCNA (Cisco Certified Network Associate)</strong> – Systech Network Academy</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PROJECT DETAILS MODAL
+       ========================================================================== -->
+  <div id="project-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-3xl w-full flex flex-col shadow-2xl overflow-hidden">
+      
+      <!-- Header -->
+      <div class="p-6 border-b border-slate-800 flex items-start justify-between bg-slate-950/80">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span id="modal-proj-role" class="text-xs font-mono-code font-bold text-cyan-400"></span>
+            <span class="text-slate-500">•</span>
+            <span id="modal-proj-duration" class="text-xs font-mono-code text-slate-400"></span>
+          </div>
+          <h3 id="modal-proj-title" class="text-xl sm:text-2xl font-heading font-bold text-white"></h3>
+        </div>
+        <button id="close-project-modal" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="p-6 sm:p-8 space-y-6 overflow-y-auto max-h-[75vh]">
+        
+        <div>
+          <h4 class="text-xs font-mono-code uppercase tracking-wider text-slate-400 mb-2">Technologies & Protocols</h4>
+          <p id="modal-proj-tech" class="text-xs sm:text-sm text-cyan-300 font-mono-code bg-slate-950 p-3 rounded-xl border border-slate-800"></p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-mono-code uppercase tracking-wider text-slate-400 mb-2">Project Overview</h4>
+          <p id="modal-proj-summary" class="text-sm text-slate-300 leading-relaxed"></p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-mono-code uppercase tracking-wider text-slate-400 mb-3">Key Technical Deliverables & Outcomes</h4>
+          <ul id="modal-proj-outcomes" class="space-y-2 text-sm"></ul>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Custom App JS -->
+  <script src="app.js"></script>
+</body>
+</html>
